@@ -1119,7 +1119,7 @@ lwip_recvfrom(int s, void *mem, size_t len, int flags,
       /* If this is a TCP socket, check if there is data left in the
          buffer. If so, it should be saved in the sock structure for next
          time around. */
-      if ((NETCONNTYPE_GROUP(netconn_type(sock->conn)) == NETCONN_TCP) && (buflen - copylen > 0)) {
+      if ((NETCONNTYPE_GROUP(netconn_type(sock->conn)) == NETCONN_TCP || NETCONNTYPE_GROUP(netconn_type(sock->conn)) == NETCONN_UDP) && (buflen - copylen > 0)) {
         sock->lastdata = buf;
         sock->lastoffset += copylen;
         LWIP_DEBUGF(SOCKETS_DEBUG, ("lwip_recvfrom: lastdata now netbuf=%p\n", buf));
